@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>AI Leak Guard</title>
+<link rel="stylesheet" href="../ui.css">
+<style>body{max-width:620px;margin:0 auto;padding:24px 16px}</style>
+</head>
+<body>
+  <div class="head"><img src="../icons/icon48.png" alt="" width="32" height="32"><h1>AI Leak Guard</h1></div>
+  <p class="muted" id="intro"></p>
+  <p class="notice" id="managed" hidden></p>
+
+  <section>
+    <h2 id="h-lang"></h2>
+    <select id="lang">
+      <option value="auto">Auto</option><option value="en">English</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="fr">Français</option><option value="es">Español</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="pt">Português</option><option value="sv">Svenska</option>
+    </select>
+  </section>
+
+  <section>
+    <h2 id="h-cats"></h2>
+    <div id="cats" class="checks"></div>
+  </section>
+
+  <section>
+    <h2 id="h-terms"></h2>
+    <p class="muted" id="termsHint"></p>
+    <textarea id="terms" rows="8" placeholder="Müller AG&#10;Projekt Alpenblick&#10;Rossi S.r.l."></textarea>
+    <p class="muted" id="orgTerms" hidden></p>
+  </section>
+
+  <div class="row"><button id="save" class="primary"></button><span id="saved" class="muted" role="status"></span></div>
+
+  <section>
+    <h2 id="h-try"></h2>
+    <textarea id="try" rows="4"></textarea>
+    <ul id="tryOut" class="found"></ul>
+  </section>
+
+  <script src="../src/detectors.js"></script>
+  <script src="../src/i18n.js"></script>
+  <script src="../src/settings.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

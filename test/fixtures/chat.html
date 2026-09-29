@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>test chat</title>
+<textarea id="ta" style="width:600px;height:80px"></textarea>
+<div id="ce" contenteditable="true" style="border:1px solid #999;min-height:40px;width:600px"></div>
+<button id="send" aria-label="Send message">➤</button>
+<ul id="log"></ul>
+<script>
+function send(t){const li=document.createElement('li');li.textContent=t;document.getElementById('log').appendChild(li);}
+document.getElementById('ce').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(document.getElementById('ce').innerText);document.getElementById('ce').innerText='';}});
+document.getElementById('send').addEventListener('click',()=>{send(document.getElementById('ta').value);});
+</script>

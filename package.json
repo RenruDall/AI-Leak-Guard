@@ -1,0 +1,22 @@
+{
+  "name": "ai-leak-guard",
+  "private": true,
+  "description": "Browser extension that warns before confidential data is pasted into AI chat tools.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/detectors.test.cjs && node test/publish.test.mjs",
+    "test:e2e": "node test/e2e.test.mjs",
+    "build": "node scripts/build.mjs",
+    "check-version": "node scripts/check-version.mjs",
+    "publish:chrome": "node scripts/publish-chrome.mjs",
+    "publish:edge": "node scripts/publish-edge.mjs",
+    "test:unit": "node test/detectors.test.cjs",
+    "test:publish": "node test/publish.test.mjs",
+    "bump": "node scripts/bump.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.0"
+  }
+}

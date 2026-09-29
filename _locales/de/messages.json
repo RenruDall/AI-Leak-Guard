@@ -1,0 +1,8 @@
+{
+ "extName": {
+  "message": "AI Leak Guard"
+ },
+ "extDesc": {
+  "message": "Warnt vor dem Einfügen von Passwörtern, Kundendaten oder IBANs in ChatGPT, Copilot oder Gemini. Läuft nur auf deinem Gerät."
+ }
+}

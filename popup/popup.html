@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../ui.css">
+<style>body{width:280px;padding:14px 16px}</style>
+</head>
+<body>
+  <div class="head"><img src="../icons/icon32.png" alt="" width="24" height="24"><h1>AI Leak Guard</h1></div>
+  <label class="switch"><input type="checkbox" id="enabled"><span id="enabledLbl"></span></label>
+  <p class="muted" id="managed" hidden></p>
+  <div class="stats">
+    <div><strong id="s-warn">0</strong><span id="l-warn"></span></div>
+    <div><strong id="s-mask">0</strong><span id="l-mask"></span></div>
+    <div><strong id="s-cancel">0</strong><span id="l-cancel"></span></div>
+  </div>
+  <p class="muted" id="local"></p>
+  <button id="opts" class="linkbtn"></button>
+  <script src="../src/i18n.js"></script>
+  <script src="../src/settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

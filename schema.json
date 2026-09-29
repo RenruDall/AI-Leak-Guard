@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "customTerms": {
+      "title": "Protected terms",
+      "description": "Company-wide terms that trigger a warning, e.g. customer names, project code names.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "allowSendAnyway": {
+      "title": "Allow users to send anyway",
+      "description": "If false, users can only replace detected data with placeholders or cancel.",
+      "type": "boolean"
+    },
+    "forceEnabled": {
+      "title": "Always on",
+      "description": "If true, users cannot switch the protection off.",
+      "type": "boolean"
+    },
+    "lockedCategories": {
+      "title": "Categories users cannot disable",
+      "description": "Any of: secrets, finance, personal, internal, labels, custom.",
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
