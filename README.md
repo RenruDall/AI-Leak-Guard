@@ -9,7 +9,11 @@ A Chrome and Edge extension that warns people before they paste or send confiden
 3. Turn on **Developer mode**.
 4. Click **Load unpacked** and pick the `ai-leak-guard` folder.
 5. Open ChatGPT, Copilot, Gemini or Claude and paste something like
-   `Please pay DE89 3704 0044 0532 0130 00, contact mario.rossi@example.it`.
+   `Please pay DE89 3704 0044 0532 0130 00, contact mario.rossi@example.it`.<br>
+   
+   <img alt="image" src="https://github.com/user-attachments/assets/e28a6fcc-4963-47ec-9c9b-7f0776567015" />
+   
+
 
 ## What it does
 
