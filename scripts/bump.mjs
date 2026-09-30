@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Sets a new version in manifest.json and prints the commands that start a release.
 // Usage: npm run bump -- 0.4.0
 import fs from "node:fs";

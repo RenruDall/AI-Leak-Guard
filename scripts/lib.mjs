@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Shared helpers for build, test and publish scripts. No dependencies.
 import fs from "node:fs";
 import path from "node:path";
@@ -7,7 +8,7 @@ import { fileURLToPath } from "node:url";
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 // Everything that ships inside the extension package. Nothing else is included.
-export const EXT_ENTRIES = ["manifest.json", "schema.json", "ui.css", "_locales", "icons", "src", "popup", "options"];
+export const EXT_ENTRIES = ["LICENSE", "manifest.json", "schema.json", "ui.css", "_locales", "icons", "src", "popup", "options"];
 
 export function readManifest(root = ROOT) {
   return JSON.parse(fs.readFileSync(path.join(root, "manifest.json"), "utf8"));

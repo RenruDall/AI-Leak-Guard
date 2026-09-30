@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Uploads the package to the Chrome Web Store and submits it for review (Chrome Web Store API v2).
 //
 // Required environment:

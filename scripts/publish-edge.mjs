@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Uploads the package to Microsoft Edge Add-ons and submits it for certification (Add-ons API v1.1).
 //
 // Required environment: EDGE_PRODUCT_ID, EDGE_CLIENT_ID, EDGE_API_KEY

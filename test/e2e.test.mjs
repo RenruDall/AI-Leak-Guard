@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // End-to-end test: loads the extension into Chromium and exercises it on a local chat-like page.
 // Run: npx playwright install chromium && node test/e2e.test.mjs
 import { chromium } from "playwright";
@@ -94,9 +95,10 @@ try {
   await op.goto(`chrome-extension://${extId(ext)}/options/options.html`);
   await op.fill("#terms", "Alpenblick");
   await op.click("#save");
-  await op.waitForTimeout(300);
+  await op.locator("#saved").filter({ hasText: /\S/ }).waitFor({ timeout: 5000 }).catch(() => {});
   await op.fill("#try", "Projekt Alpenblick, Karte 4111 1111 1111 1111");
-  await op.waitForTimeout(500);
+  // Wait for the result rather than a fixed time: settings load asynchronously.
+  await op.locator("#tryOut .masked").waitFor({ timeout: 5000 }).catch(() => {});
   const tryOut = await op.locator("#tryOut").innerText();
   check("settings page: try-it box finds custom term and card", tryOut.includes("Geschützter Begriff") && tryOut.includes("Kreditkartennummer"));
 
@@ -108,6 +110,9 @@ try {
   const pop = await ctx.newPage();
   await pop.goto(`chrome-extension://${extId(ext)}/popup/popup.html`);
   await pop.waitForTimeout(300);
+  check("popup shows author credit and version", /AI Leak Guard \d+\.\d+\.\d+\s·\s© 2026 Michael Ladurner/.test(await pop.locator(".credit").innerText()));
+  await pop.setViewportSize({ width: 312, height: 330 });
+  await pop.screenshot({ path: path.join(os.tmpdir(), "alg-popup.png") });
   check("popup renders with counters", (await pop.locator("#enabledLbl").innerText()).length > 0 && Number(await pop.locator("#s-warn").innerText()) >= 1);
   await ctx.close();
 

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 /* Settings: user settings (sync storage) merged with organisation policy (managed storage). */
 (function (root) {
   const DEFAULTS = { enabled: true, lang: "auto", disabled: [], customTerms: [] };

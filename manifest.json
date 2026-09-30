@@ -3,6 +3,7 @@
   "name": "__MSG_extName__",
   "short_name": "AI Leak Guard",
   "description": "__MSG_extDesc__",
+  "author": "Michael Ladurner",
   "version": "0.3.0",
   "default_locale": "en",
   "icons": {

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Packages the extension into dist/ai-leak-guard-<version>.zip after sanity checks.
 import fs from "node:fs";
 import path from "node:path";

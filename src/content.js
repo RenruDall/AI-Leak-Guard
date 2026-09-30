@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 /* AI Leak Guard – content script for AI chat sites.
  * Intercepts paste and send, checks the text locally, and asks before confidential data leaves. */
 (function () {

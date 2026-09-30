@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 const assert = require("assert");
 const { detect, mask, _v } = require("../src/detectors.js");
 

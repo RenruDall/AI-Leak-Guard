@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 /* UI strings in English, German and Italian. */
 (function (root) {
   const S = {

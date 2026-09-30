@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 const OL = {
   en: { intro: "AI Leak Guard checks text you paste or send to AI chat tools. Everything is checked on this device; nothing is uploaded.", lang: "Language", cats: "What to check", terms: "Protected terms", termsHint: "One per line: customer names, project code names, product names. Matching is case-insensitive.", orgTerms: "{n} more terms are set by your organisation.", save: "Save", saved: "Saved", managed: "Some settings are managed by your organisation.", tryIt: "Try it", tryPh: "Paste any text here to see what would be detected.", none: "Nothing detected." },
   de: { intro: "AI Leak Guard prüft Text, den du in KI-Chats einfügst oder sendest. Alles wird auf diesem Gerät geprüft; nichts wird hochgeladen.", lang: "Sprache", cats: "Was geprüft wird", terms: "Geschützte Begriffe", termsHint: "Einer pro Zeile: Kundennamen, Projektnamen, Produktnamen. Groß-/Kleinschreibung egal.", orgTerms: "{n} weitere Begriffe legt deine Organisation fest.", save: "Speichern", saved: "Gespeichert", managed: "Einige Einstellungen werden von deiner Organisation verwaltet.", tryIt: "Ausprobieren", tryPh: "Füge hier Text ein, um zu sehen, was erkannt würde.", none: "Nichts erkannt." },
@@ -72,3 +73,5 @@ $("save").addEventListener("click", async () => {
 let tm;
 $("try").addEventListener("input", () => { clearTimeout(tm); tm = setTimeout(runTry, 200); });
 render();
+
+try { document.getElementById("ver").textContent = "AI Leak Guard " + chrome.runtime.getManifest().version; } catch (e) {}

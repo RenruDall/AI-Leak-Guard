@@ -2,6 +2,8 @@
   "name": "ai-leak-guard",
   "private": true,
   "description": "Browser extension that warns before confidential data is pasted into AI chat tools.",
+  "author": "Michael Ladurner",
+  "license": "MIT",
   "engines": {
     "node": ">=20"
   },

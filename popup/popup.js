@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 const L = {
   en: { on: "Protection on", warn: "warnings", mask: "masked", cancel: "stopped", local: "Counts only. Your text is never stored.", opts: "Settings and protected terms", managed: "Managed by your organisation" },
   de: { on: "Schutz aktiv", warn: "Warnungen", mask: "maskiert", cancel: "gestoppt", local: "Nur Zähler. Dein Text wird nie gespeichert.", opts: "Einstellungen und geschützte Begriffe", managed: "Von deiner Organisation verwaltet" },
@@ -38,3 +39,5 @@ ALG_SETTINGS.load().then(s => {
   if (s.managed) { $("managed").hidden = false; $("managed").textContent = t.managed; }
   if (s.managed && s.managed.forceEnabled) $("enabled").disabled = true;
 });
+
+try { document.getElementById("ver").textContent = "AI Leak Guard " + chrome.runtime.getManifest().version; } catch (e) {}

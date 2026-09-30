@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // In a release, the git tag (v1.2.3) must match manifest.json's version (1.2.3).
 import { readManifest, fail } from "./lib.mjs";
 

@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 // Tests the publish scripts against local mock versions of the Chrome Web Store and Edge Add-ons APIs.
 import http from "node:http";
 import { spawnSync } from "node:child_process";

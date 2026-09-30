@@ -1,3 +1,4 @@
+// Copyright (c) 2026 Michael Ladurner. Licensed under the MIT License. See LICENSE.
 /* AI Leak Guard – detection engine. Runs fully on-device; no network access. */
 (function (root) {
   "use strict";
