@@ -1,4 +1,4 @@
-# AI Leak Guard 0.3
+# AI Leak Guard
 
 Created by **Michael Ladurner** ([@Mengokai](https://github.com/Mengokai)).
 
@@ -54,7 +54,7 @@ Example policy for the extension (Chrome `3rdparty` / Edge `3rdparty` policy, se
 }
 ```
 
-## Known limits of 0.3
+## Known limits 
 
 - **Names of people and companies are not detected automatically** unless they are in your protected terms. The next step is a small on-device language model (for example with Transformers.js) for names and addresses.
 - File uploads (PDF, Word) are not checked yet; only pasted and typed text.
