@@ -1,7 +1,5 @@
 # AI Leak Guard
 
-Created by **Michael Ladurner** ([@Mengokai](https://github.com/Mengokai)).
-
 A Chrome and Edge extension that warns people before they paste or send confidential data to AI chat tools. Every check runs in the browser. No text is uploaded or stored; only counters (warnings, masked, stopped) are kept locally.
 
 ## Install (developer mode)
