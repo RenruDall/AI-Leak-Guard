@@ -14,6 +14,7 @@
       hintMask: "Placeholders like [EMAIL_1] keep the meaning without the real data.",
       hintSend: "After you choose, press Enter again to send.",
       localOnly: "Checked on this device. Nothing was sent anywhere.",
+      preview: "With placeholders:",
       policy: "Your organisation does not allow sending this data.",
       types: {
         private_key: "Private key", aws_key: "AWS access key", github_token: "GitHub token", ai_api_key: "AI service API key",
@@ -36,6 +37,7 @@
       hintMask: "Platzhalter wie [EMAIL_1] erhalten den Sinn ohne die echten Daten.",
       hintSend: "Drücke danach erneut Enter zum Senden.",
       localOnly: "Auf diesem Gerät geprüft. Es wurde nichts übertragen.",
+      preview: "Mit Platzhaltern:",
       policy: "Deine Organisation erlaubt das Senden dieser Daten nicht.",
       types: {
         private_key: "Privater Schlüssel", aws_key: "AWS-Zugangsschlüssel", github_token: "GitHub-Token", ai_api_key: "API-Schlüssel eines KI-Dienstes",
@@ -58,6 +60,7 @@
       hintMask: "I segnaposto come [EMAIL_1] mantengono il senso senza i dati reali.",
       hintSend: "Dopo la scelta, premi di nuovo Invio per inviare.",
       localOnly: "Controllato su questo dispositivo. Nulla è stato inviato.",
+      preview: "Con segnaposto:",
       policy: "La tua organizzazione non consente di inviare questi dati.",
       types: {
         private_key: "Chiave privata", aws_key: "Chiave di accesso AWS", github_token: "Token GitHub", ai_api_key: "Chiave API di un servizio IA",
@@ -80,6 +83,7 @@
       hintMask: "Les substituts comme [EMAIL_1] gardent le sens sans les vraies données.",
       hintSend: "Après votre choix, appuyez de nouveau sur Entrée pour envoyer.",
       localOnly: "Vérifié sur cet appareil. Rien n'a été envoyé.",
+      preview: "Avec substituts :",
       policy: "Votre organisation n'autorise pas l'envoi de ces données.",
       types: {
         private_key: "Clé privée", aws_key: "Clé d'accès AWS", github_token: "Jeton GitHub", ai_api_key: "Clé API d'un service d'IA",
@@ -102,6 +106,7 @@
       hintMask: "Los marcadores como [EMAIL_1] conservan el sentido sin los datos reales.",
       hintSend: "Después de elegir, pulsa Intro de nuevo para enviar.",
       localOnly: "Comprobado en este dispositivo. No se ha enviado nada.",
+      preview: "Con marcadores:",
       policy: "Tu organización no permite enviar estos datos.",
       types: {
         private_key: "Clave privada", aws_key: "Clave de acceso de AWS", github_token: "Token de GitHub", ai_api_key: "Clave API de un servicio de IA",
@@ -124,6 +129,7 @@
       hintMask: "Plaatsaanduidingen zoals [EMAIL_1] behouden de betekenis zonder de echte gegevens.",
       hintSend: "Druk na je keuze opnieuw op Enter om te verzenden.",
       localOnly: "Gecontroleerd op dit apparaat. Er is niets verzonden.",
+      preview: "Met plaatsaanduidingen:",
       policy: "Je organisatie staat het verzenden van deze gegevens niet toe.",
       types: {
         private_key: "Privésleutel", aws_key: "AWS-toegangssleutel", github_token: "GitHub-token", ai_api_key: "API-sleutel van een AI-dienst",
@@ -147,6 +153,7 @@
       hintMask: "Symbole zastępcze, np. [EMAIL_1], zachowują sens bez prawdziwych danych.",
       hintSend: "Po wyborze naciśnij ponownie Enter, aby wysłać.",
       localOnly: "Sprawdzono na tym urządzeniu. Nic nie zostało wysłane.",
+      preview: "Z symbolami zastępczymi:",
       policy: "Twoja organizacja nie pozwala na wysyłanie tych danych.",
       types: {
         private_key: "Klucz prywatny", aws_key: "Klucz dostępu AWS", github_token: "Token GitHub", ai_api_key: "Klucz API usługi AI",
@@ -170,6 +177,7 @@
       hintMask: "Marcadores como [EMAIL_1] mantêm o sentido sem os dados reais.",
       hintSend: "Depois de escolher, prima Enter novamente para enviar.",
       localOnly: "Verificado neste dispositivo. Nada foi enviado.",
+      preview: "Com marcadores:",
       policy: "A sua organização não permite enviar estes dados.",
       types: {
         private_key: "Chave privada", aws_key: "Chave de acesso AWS", github_token: "Token do GitHub", ai_api_key: "Chave de API de um serviço de IA",
@@ -193,6 +201,7 @@
       hintMask: "Platshållare som [EMAIL_1] behåller innebörden utan de riktiga uppgifterna.",
       hintSend: "Tryck på Enter igen efter ditt val för att skicka.",
       localOnly: "Kontrollerat på den här enheten. Inget har skickats.",
+      preview: "Med platshållare:",
       policy: "Din organisation tillåter inte att de här uppgifterna skickas.",
       types: {
         private_key: "Privat nyckel", aws_key: "AWS-åtkomstnyckel", github_token: "GitHub-token", ai_api_key: "API-nyckel för en AI-tjänst",

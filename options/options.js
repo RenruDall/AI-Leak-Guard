@@ -30,7 +30,7 @@ async function render() {
   for (const c of ALG.CATEGORIES) {
     const id = "cat-" + c;
     const lab = document.createElement("label");
-    lab.innerHTML = `<input type="checkbox" id="${id}" data-cat="${c}"> <span></span>`;
+    lab.innerHTML = `<span></span><input type="checkbox" class="sw" id="${id}" data-cat="${c}">`;
     lab.querySelector("span").textContent = T.cats[c];
     const box = lab.querySelector("input");
     box.checked = !(s.user.disabled || []).includes(c) || locked.includes(c);
@@ -58,7 +58,8 @@ async function runTry() {
     li.append(b, c); out.appendChild(li);
   }
   const m = document.createElement("li"); m.className = "masked";
-  m.textContent = ALG.mask(text, f); out.appendChild(m);
+  const esc = v => v.replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  m.innerHTML = esc(ALG.mask(text, f)).replace(/\[[A-Z0-9_]+_\d+\]/g, x => `<mark>${x}</mark>`); out.appendChild(m);
 }
 
 $("save").addEventListener("click", async () => {

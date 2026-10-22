@@ -4,42 +4,57 @@
 <meta charset="utf-8">
 <title>AI Leak Guard</title>
 <link rel="stylesheet" href="../ui.css">
-<style>body{max-width:620px;margin:0 auto;padding:24px 16px}</style>
+<style>
+body{padding:32px 16px 48px}
+main{max-width:640px;margin:0 auto}
+.hero{display:flex;gap:14px;align-items:center;margin-bottom:4px}
+.hero img{width:44px;height:44px}
+.hero h1{font-size:22px}
+#intro{font-size:14px;margin:8px 0 0}
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cardhead h2{margin:0}
+.save{position:sticky;bottom:16px;display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--bg) 88%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);box-shadow:0 8px 30px rgba(9,12,20,.08)}
+#saved{color:var(--ok);font-weight:600;font-size:13px}
+#terms{min-height:150px}
+#try{min-height:90px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px}
+.credit{text-align:center;border:0}
+</style>
 </head>
 <body>
-  <div class="head"><img src="../icons/icon48.png" alt="" width="32" height="32"><h1>AI Leak Guard</h1></div>
+<main>
+  <div class="hero"><img src="../icons/icon48.png" alt=""><div><h1>AI Leak Guard</h1></div></div>
   <p class="muted" id="intro"></p>
   <p class="notice" id="managed" hidden></p>
 
-  <section>
-    <h2 id="h-lang"></h2>
+  <section class="card">
+    <div class="cardhead"><h2 id="h-lang"></h2>
     <select id="lang">
       <option value="auto">Auto</option><option value="en">English</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="fr">Français</option><option value="es">Español</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="pt">Português</option><option value="sv">Svenska</option>
-    </select>
+    </select></div>
   </section>
 
-  <section>
+  <section class="card">
     <h2 id="h-cats"></h2>
     <div id="cats" class="checks"></div>
   </section>
 
-  <section>
+  <section class="card">
     <h2 id="h-terms"></h2>
     <p class="muted" id="termsHint"></p>
-    <textarea id="terms" rows="8" placeholder="Müller AG&#10;Projekt Alpenblick&#10;Rossi S.r.l."></textarea>
+    <textarea id="terms" rows="7" placeholder="Müller AG&#10;Projekt Alpenblick&#10;Rossi S.r.l."></textarea>
     <p class="muted" id="orgTerms" hidden></p>
   </section>
 
-  <div class="row"><button id="save" class="primary"></button><span id="saved" class="muted" role="status"></span></div>
+  <div class="save"><button id="save" class="primary"></button><span id="saved" role="status"></span></div>
 
-  <section>
+  <section class="card">
     <h2 id="h-try"></h2>
     <textarea id="try" rows="4"></textarea>
     <ul id="tryOut" class="found"></ul>
   </section>
 
   <footer class="credit"><span id="ver" class="nw">AI Leak Guard</span> · <span class="nw">© 2026 Michael Ladurner</span></footer>
-
+</main>
   <script src="../src/detectors.js"></script>
   <script src="../src/i18n.js"></script>
   <script src="../src/settings.js"></script>

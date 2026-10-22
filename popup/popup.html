@@ -3,19 +3,40 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../ui.css">
-<style>body{width:280px;padding:14px 16px}</style>
+<style>
+body{width:300px;padding:14px;background:var(--page)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.status{display:flex;gap:12px;align-items:center;padding:14px;border-radius:16px;background:var(--ok-bg);color:var(--ok);transition:background .2s,color .2s}
+.status.off{background:var(--soft);color:var(--muted)}
+.status svg{flex:none;width:30px;height:30px}
+.status b{display:block;font-size:15px;color:inherit}
+.status small{display:block;font-size:12px;color:var(--muted);margin-top:1px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.stats div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 6px;display:grid;text-align:center}
+.stats strong{font-size:20px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.2}
+.stats span{font-size:11.5px;color:var(--muted)}
+#local{display:flex;gap:6px;align-items:center;font-size:12px}
+#local::before{content:"";flex:none;width:12px;height:12px;background:currentColor;-webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>') center/contain no-repeat;mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>') center/contain no-repeat}
+#opts{width:100%;margin-top:10px}
+.credit{margin-top:12px}
+</style>
 </head>
 <body>
-  <div class="head"><img src="../icons/icon32.png" alt="" width="24" height="24"><h1>AI Leak Guard</h1></div>
-  <label class="switch"><input type="checkbox" id="enabled"><span id="enabledLbl"></span></label>
-  <p class="muted" id="managed" hidden></p>
+  <div class="top">
+    <div class="head"><img src="../icons/icon32.png" alt="" width="22" height="22"><h1>AI Leak Guard</h1></div>
+    <input type="checkbox" class="sw" id="enabled" aria-labelledby="enabledLbl">
+  </div>
+  <div class="status" id="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path id="mark" d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+    <div><b id="enabledLbl"></b><small id="managed" hidden></small></div>
+  </div>
   <div class="stats">
     <div><strong id="s-warn">0</strong><span id="l-warn"></span></div>
     <div><strong id="s-mask">0</strong><span id="l-mask"></span></div>
     <div><strong id="s-cancel">0</strong><span id="l-cancel"></span></div>
   </div>
   <p class="muted" id="local"></p>
-  <button id="opts" class="linkbtn"></button>
+  <button id="opts"></button>
   <footer class="credit"><span id="ver" class="nw">AI Leak Guard</span> · <span class="nw">© 2026 Michael Ladurner</span></footer>
   <script src="../src/i18n.js"></script>
   <script src="../src/settings.js"></script>

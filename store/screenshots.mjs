@@ -21,12 +21,12 @@ const demo = fs.readFileSync(path.join(ROOT, "store", "demo-chat.html"));
 const server = http.createServer((q, r) => { r.setHeader("content-type", "text/html; charset=utf-8"); r.end(demo); }).listen(PORT);
 const extId = p => [...crypto.createHash("sha256").update(p).digest("hex").slice(0, 32)].map(c => String.fromCharCode(97 + parseInt(c, 16))).join("");
 
-const lang = process.argv[2] || "en-US", tag = lang.slice(0, 2);
-const ctx = await chromium.launchPersistentContext("", { headless: true, channel: "chromium", locale: lang, viewport: { width: 1280, height: 800 },
+const lang = process.argv[2] || "en-US", dark = process.argv[3] === "dark", tag = lang.slice(0, 2) + (dark ? "-dark" : "");
+const ctx = await chromium.launchPersistentContext("", { headless: true, channel: "chromium", locale: lang, colorScheme: dark ? "dark" : "light", viewport: { width: 1280, height: 800 },
   args: [`--lang=${lang}`, `--host-resolver-rules=MAP ${HOST} 127.0.0.1`, `--disable-extensions-except=${ext}`, `--load-extension=${ext}`] });
 const TEXT = { en: "Please remind Rossi Logistica: invoice 2026-118, pay to IBAN DE89 3704 0044 0532 0130 00. Contact: mario.rossi@example.it. Confidential.",
   de: "Bitte Rossi Logistica erinnern: Rechnung 2026-118, Zahlung an IBAN DE89 3704 0044 0532 0130 00. Kontakt: mario.rossi@example.it. Vertraulich.",
-  it: "Ricorda a Rossi Logistica: fattura 2026-118, pagamento su IBAN DE89 3704 0044 0532 0130 00. Contatto: mario.rossi@example.it. Riservato." }[tag] || "";
+  it: "Ricorda a Rossi Logistica: fattura 2026-118, pagamento su IBAN DE89 3704 0044 0532 0130 00. Contatto: mario.rossi@example.it. Riservato." }[tag.slice(0, 2)] || "";
 try {
   const p = await ctx.newPage(); await p.goto(ORIGIN); await p.waitForTimeout(600);
   await p.focus("#ta"); await p.evaluate(t => { const dt = new DataTransfer(); dt.setData("text/plain", t); document.getElementById("ta").dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true })); }, TEXT);
@@ -44,7 +44,7 @@ try {
   // popup on a calm backdrop
   await pop.setContent(`<style>body{margin:0;height:800px;display:grid;place-items:center;background:linear-gradient(135deg,#EEF2FF,#F7F7F8)}iframe{width:${pw}px;height:${ph}px;zoom:1.5;border:0;border-radius:14px;box-shadow:0 20px 60px rgba(20,30,60,.18);background:#fff}</style><iframe src="chrome-extension://${id}/popup/popup.html"></iframe>`);
   await pop.waitForTimeout(700); await pop.screenshot({ path: path.join(OUT, `4-popup-${tag}.png`) });
-  if (tag === "en") {
+  if (tag === "en" && !dark) {
     const icon = fs.readFileSync(path.join(ROOT, "icons/icon128.png")).toString("base64");
     const t = await ctx.newPage(); await t.setViewportSize({ width: 440, height: 280 });
     await t.setContent(`<style>body{margin:0;width:440px;height:280px;display:flex;align-items:center;gap:22px;padding:0 34px;box-sizing:border-box;background:linear-gradient(135deg,#0F172A,#1E3A8A);color:#fff;font:600 15px -apple-system,"Segoe UI",Roboto,sans-serif}img{width:96px;height:96px}b{display:block;font-size:28px;line-height:1.1;margin-bottom:8px}span{opacity:.85;font-weight:500;line-height:1.4}</style><img src="data:image/png;base64,${icon}"><div><b>AI Leak Guard</b><span>Stops passwords, IBANs and customer data before they reach AI chats.</span></div>`);
