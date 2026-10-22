@@ -21,7 +21,7 @@ A store job skips itself with a warning if its credentials are not set yet, so y
 
 ### 1. GitHub repository
 
-1. Create a **private** repository, for example `ai-leak-guard`, and push this folder to it.
+1. The repository is `RenruDall/ai-leak-guard`. The workflows live in `.github/workflows/`.
 2. In **Settings → Environments**, create an environment called `production`. Add yourself under **Required reviewers**. Every store submission then waits for your click in the Actions tab.
 3. Secrets and variables below go under **Settings → Secrets and variables → Actions** (or on the `production` environment).
 
@@ -50,7 +50,7 @@ No long-lived secret is stored in GitHub. GitHub proves its identity to Google f
 
 ```bash
 PROJECT_ID=your-project; PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
-REPO=Mengokai/ai-leak-guard
+REPO=RenruDall/ai-leak-guard
 
 gcloud services enable chromewebstore.googleapis.com iamcredentials.googleapis.com sts.googleapis.com --project $PROJECT_ID
 gcloud iam service-accounts create cws-publisher --project $PROJECT_ID

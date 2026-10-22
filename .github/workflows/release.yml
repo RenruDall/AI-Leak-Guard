@@ -1,0 +1,109 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      zip: ${{ steps.build.outputs.zip }}
+      version: ${{ steps.build.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tag matches manifest version
+        run: node scripts/check-version.mjs
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run test:e2e
+      - name: Build package
+        id: build
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: ${{ steps.build.outputs.zip }}
+
+  github-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "AI Leak Guard ${{ needs.build.outputs.version }}" \
+            --generate-notes
+
+  chrome:
+    needs: [build, github-release]
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist
+      - name: Sign in to Google (keyless, Option B)
+        id: auth
+        if: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && vars.GCP_SERVICE_ACCOUNT != '' }}
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/chromewebstore
+      - name: Submit to Chrome Web Store
+        env:
+          CWS_PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+          CWS_EXTENSION_ID: ${{ vars.CWS_EXTENSION_ID }}
+          CWS_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+          CWS_CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CWS_CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          CWS_REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          CWS_STAGED: ${{ vars.CWS_STAGED }}
+          CWS_DEPLOY_PERCENTAGE: ${{ vars.CWS_DEPLOY_PERCENTAGE }}
+        run: node scripts/publish-chrome.mjs dist/ai-leak-guard-${{ needs.build.outputs.version }}.zip
+
+  edge:
+    needs: [build, github-release]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: package
+          path: dist
+      - name: Submit to Microsoft Edge Add-ons
+        env:
+          EDGE_PRODUCT_ID: ${{ vars.EDGE_PRODUCT_ID }}
+          EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
+          EDGE_API_KEY: ${{ secrets.EDGE_API_KEY }}
+          RELEASE_NOTES: "Version ${{ needs.build.outputs.version }}. See https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
+        run: node scripts/publish-edge.mjs dist/ai-leak-guard-${{ needs.build.outputs.version }}.zip
