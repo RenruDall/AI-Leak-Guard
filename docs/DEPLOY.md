@@ -8,6 +8,8 @@ git commit -am "Release 0.4.0"
 git tag v0.4.0 && git push origin main --tags
 ```
 
+Instead of pushing a tag, you can also push the commit and start **Actions › Release › Run workflow** on `main`. The workflow then creates the tag `v<version from manifest.json>` itself.
+
 ## What runs when
 
 | Trigger | Workflow | What happens |

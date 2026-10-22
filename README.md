@@ -73,13 +73,15 @@ npm run build                          # dist/ai-leak-guard-<version>.zip, conta
 
 ## Releases
 
-Releases are automatic: bump the version, tag, push. GitHub Actions tests, builds, creates a GitHub release and submits to the Chrome Web Store and Edge Add-ons. One-time setup and company rollout (Intune): see [docs/DEPLOY.md](docs/DEPLOY.md).
+Releases are automatic: bump the version, commit, then either push a tag or start **Actions › Release › Run workflow** on `main`. GitHub Actions tests, builds, creates a GitHub release and submits to the Chrome Web Store and Edge Add-ons. One-time setup and company rollout (Intune): see [docs/DEPLOY.md](docs/DEPLOY.md). Store texts, screenshots and privacy answers: [store/LISTING.md](store/LISTING.md). Privacy policy: [docs/PRIVACY.md](docs/PRIVACY.md).
 
 ## Project layout
 
 ```
 .github/workflows/   CI on every push, release on version tags
 docs/DEPLOY.md       Store setup, credentials, company rollout
+docs/PRIVACY.md      Privacy policy (linked from the store listings)
+store/               Store texts, screenshots and the screenshot script
 scripts/             Build, version bump and store publish scripts (no dependencies)
 test/                Unit, publish-script and browser tests
 manifest.json        Extension manifest (MV3)
