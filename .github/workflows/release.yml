@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     tags: ['v*']
-  workflow_dispatch:   # run again for an existing tag: choose the tag as "Use workflow from"
+  workflow_dispatch:   # run from main: tags and releases the version in manifest.json
 
 permissions:
   contents: read
@@ -13,13 +13,21 @@ jobs:
     outputs:
       zip: ${{ steps.build.outputs.zip }}
       version: ${{ steps.build.outputs.version }}
+      tag: ${{ steps.tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Release tag
+        id: tag
+        run: |
+          if [ "$GITHUB_REF_TYPE" = tag ]; then TAG="$GITHUB_REF_NAME"; else TAG="v$(node -p "require('./manifest.json').version")"; fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"; echo "Releasing $TAG"
       - name: Tag matches manifest version
-        run: node scripts/check-version.mjs
+        run: node scripts/check-version.mjs "${{ steps.tag.outputs.tag }}"
+        env:
+          GITHUB_REF_NAME: ${{ steps.tag.outputs.tag }}
       - run: npm install --no-audit --no-fund
       - run: npx playwright install --with-deps chromium
       - run: npm test
@@ -46,11 +54,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" dist/*.zip --repo "$GITHUB_REPOSITORY" --clobber
+          TAG="${{ needs.build.outputs.tag }}"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/*.zip --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create "$GITHUB_REF_NAME" dist/*.zip \
-              --repo "$GITHUB_REPOSITORY" \
+            gh release create "$TAG" dist/*.zip \
+              --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title "AI Leak Guard ${{ needs.build.outputs.version }}" \
               --generate-notes
           fi
@@ -110,5 +119,5 @@ jobs:
           EDGE_PRODUCT_ID: ${{ vars.EDGE_PRODUCT_ID }}
           EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
           EDGE_API_KEY: ${{ secrets.EDGE_API_KEY }}
-          RELEASE_NOTES: "Version ${{ needs.build.outputs.version }}. See https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
+          RELEASE_NOTES: "Version ${{ needs.build.outputs.version }}. See https://github.com/${{ github.repository }}/releases/tag/${{ needs.build.outputs.tag }}"
         run: node scripts/publish-edge.mjs dist/ai-leak-guard-${{ needs.build.outputs.version }}.zip
