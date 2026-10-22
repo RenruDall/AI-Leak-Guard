@@ -15,8 +15,8 @@ jobs:
       version: ${{ steps.build.outputs.version }}
       tag: ${{ steps.tag.outputs.tag }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Release tag
@@ -25,9 +25,7 @@ jobs:
           if [ "$GITHUB_REF_TYPE" = tag ]; then TAG="$GITHUB_REF_NAME"; else TAG="v$(node -p "require('./manifest.json').version")"; fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"; echo "Releasing $TAG"
       - name: Tag matches manifest version
-        run: node scripts/check-version.mjs "${{ steps.tag.outputs.tag }}"
-        env:
-          GITHUB_REF_NAME: ${{ steps.tag.outputs.tag }}
+        run: env -u GITHUB_REF_NAME node scripts/check-version.mjs "${{ steps.tag.outputs.tag }}"
       - run: npm install --no-audit --no-fund
       - run: npx playwright install --with-deps chromium
       - run: npm test
@@ -72,8 +70,8 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - uses: actions/download-artifact@v4
@@ -106,8 +104,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - uses: actions/download-artifact@v4
